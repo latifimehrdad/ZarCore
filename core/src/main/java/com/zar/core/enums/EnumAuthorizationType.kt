@@ -1,4 +1,4 @@
-package com.zar.core.tools.api.enums
+package com.zar.core.enums
 
 /**
  * Create by Mehrdad Latifi on 8/21/2022
@@ -8,7 +8,7 @@ package com.zar.core.tools.api.enums
  * Create by Mehrdad Latifi on 8/21/2022
  */
 
-enum class AuthorizationType {
+enum class EnumAuthorizationType {
     UnAuthorization,
     UnAccess
 }
