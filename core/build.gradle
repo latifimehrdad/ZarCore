@@ -59,5 +59,8 @@ dependencies {
     kapt "androidx.hilt:hilt-compiler:1.0.0"
 
 
+    //navigation component
+    api("androidx.navigation:navigation-fragment-ktx:2.5.1")
+    api("androidx.navigation:navigation-ui-ktx:2.5.1")
 
 }

@@ -1,4 +1,4 @@
-package com.zar.core.tools.api
+package com.zar.core.tools.hilt
 
 import com.google.gson.*
 import dagger.Module
@@ -22,7 +22,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RetrofitModule {
+class RetrofitProvider {
 
     //---------------------------------------------------------------------------------------------- provideRetrofit
     @Provides

@@ -1,10 +1,10 @@
-package com.zar.core.tools.api.enums
+package com.zar.core.enums
 
 /**
  * Create by Mehrdad Latifi on 8/21/2022
  */
 
-enum class ErrorType {
+enum class EnumErrorType {
     Network,
     TimeOut,
     UNKNOWN
