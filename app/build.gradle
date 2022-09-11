@@ -11,7 +11,7 @@ android {
         minSdk 26
         targetSdk 32
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -48,7 +48,4 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation "androidx.activity:activity-ktx:1.5.1"
 
-
-    //desgin Lottie
-    implementation 'com.airbnb.android:lottie:5.2.0'
 }
