@@ -4,8 +4,14 @@ import android.app.Dialog
 import android.content.Context
 import android.view.Window
 import android.view.WindowManager
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 
-class DialogManager(private val context: Context) {
+@Module
+@InstallIn(SingletonComponent::class)
+class DialogManager(@ApplicationContext private val context: Context) {
 
     //______________________________________________________________________________________________ createDialog
     fun createDialog(layout: Int): Dialog {
