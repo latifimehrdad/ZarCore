@@ -1,12 +1,12 @@
 package com.zar.core.tools.api
 
 import androidx.lifecycle.liveData
-import com.google.gson.Gson
 import com.zar.core.enums.EnumAuthorizationType
 import com.zar.core.enums.EnumErrorType
 import com.zar.core.tools.api.interfaces.RemoteErrorEmitter
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout
+import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.HttpException
 import retrofit2.Response
@@ -89,18 +89,14 @@ private fun responseMessage(response: Response<*>?): String {
     } ?: return "متاسفانه خطایی رخ داده، چند دقیقه بعد دوباره تلاش کنید"
 
     return if (!error.has("errors")) {
-        val message = JSONObject(error.getString("message"))
-        message.getString("Exception")
+        error.getString("message")
     } else {
-        val message = error.getString("message")
-        val errors = error.getString("errors")
-            .let { Gson().fromJson(it, mutableListOf<String>().javaClass) }
+        val errors = error.getJSONObject("errors").toMap()
         val sb = StringBuilder()
-        sb.append(message)
-        errors?.forEach { it ->
+        errors.forEach {
             run {
+                sb.append(it.value)
                 sb.append("\n")
-                sb.append(it)
             }
         }
         sb.toString()
@@ -108,3 +104,19 @@ private fun responseMessage(response: Response<*>?): String {
 }
 //-------------------------------------------------------------------------------------------------- responseMessage
 
+
+//-------------------------------------------------------------------------------------------------- toMap
+fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith {
+    when (val value = this[it])
+    {
+        is JSONArray ->
+        {
+            val map = (0 until value.length()).associate { Pair(it.toString(), value[it]) }
+            JSONObject(map).toMap().values.toList()
+        }
+        is JSONObject -> value.toMap()
+        JSONObject.NULL -> null
+        else            -> value
+    }
+}
+//-------------------------------------------------------------------------------------------------- toMap
