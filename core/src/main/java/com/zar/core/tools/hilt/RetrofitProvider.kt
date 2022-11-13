@@ -14,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Type
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -28,7 +29,8 @@ class RetrofitProvider {
     //---------------------------------------------------------------------------------------------- provideRetrofit
     @Provides
     @Singleton
-    fun provideRetrofit(client: OkHttpClient, baseUrl: String, gson: Gson): Retrofit = Retrofit.Builder()
+    @Named("Normal")
+    fun provideRetrofit(client: OkHttpClient, @Named("Normal") baseUrl: String, gson: Gson): Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(client)
