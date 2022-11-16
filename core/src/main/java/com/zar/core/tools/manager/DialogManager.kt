@@ -7,20 +7,12 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
 import android.view.Window
 import android.view.WindowManager
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
-class DialogManager @Inject constructor(@ApplicationContext private val context: Context) {
+class DialogManager {
 
     //---------------------------------------------------------------------------------------------- createDialogHeightWrapContent
     fun createDialogHeightWrapContent(
+        context: Context,
         layout: Int,
         verticalGravity: Int,
         verticalMargin: Int
@@ -47,7 +39,7 @@ class DialogManager @Inject constructor(@ApplicationContext private val context:
 
 
     //---------------------------------------------------------------------------------------------- createDialogHeightMatchParent
-    fun createDialogHeightMatchParent(layout: Int): Dialog {
+    fun createDialogHeightMatchParent(context: Context, layout: Int): Dialog {
         val dialog = Dialog(context)
         dialog.setCancelable(false)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
