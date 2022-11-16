@@ -8,15 +8,19 @@ import android.graphics.drawable.InsetDrawable
 import android.view.Window
 import android.view.WindowManager
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class DialogManager(@ApplicationContext private val context: Context) {
 
     //---------------------------------------------------------------------------------------------- createDialog
+    @Provides
+    @Singleton
     fun createDialog(layout: Int, verticalGravity: Int, verticalMargin : Int): Dialog {
         val dialog = Dialog(context)
         dialog.setCancelable(false)
