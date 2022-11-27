@@ -9,6 +9,9 @@
         <entry key="..\:/AndroidSource/zarCore/app/src/main/res/layout/activity_main.xml" value="0.18958333333333333" />
         <entry key="..\:/AndroidSource/zarCore/app/src/main/res/xml/file_paths.xml" value="0.18541666666666667" />
         <entry key="..\:/AndroidSource/zarCore/app/src/main/res/xml/provider_paths.xml" value="0.18541666666666667" />
+        <entry key="..\:/AndroidSource/zarCore/core/src/main/res/drawable/dw_back_recycler_loading.xml" value="0.104" />
+        <entry key="..\:/AndroidSource/zarCore/core/src/main/res/layout/adapter_loading_default.xml" value="0.21145833333333333" />
+        <entry key="..\:/AndroidSource/zarCore/core/src/main/res/layout/layout_shimmer.xml" value="0.21145833333333333" />
       </map>
     </option>
   </component>

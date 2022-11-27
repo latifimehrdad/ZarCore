@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="dayRecyclerLoadingBack">#268FBEF8</color>
+    <color name="dayRecyclerLoading">#4D8FBEF8</color>
+
+</resources>
