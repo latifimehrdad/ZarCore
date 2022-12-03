@@ -16,10 +16,9 @@ import javax.inject.Inject
 
 @Module
 @InstallIn(SingletonComponent::class)
-class ThemeManager @Inject constructor(@ApplicationContext private val context: Context,private val sharedPreferences: SharedPreferences) {
+class ThemeManager @Inject constructor(@ApplicationContext private val context: Context, private val sharedPreferences: SharedPreferences) {
 
     private val sharePreferencesKey = "themeSharedPreferences"
-
 
     //______________________________________________________________________________________________ saveThemeToSharePreferences
     private fun saveThemeToSharePreferences(theme: Int): Boolean {
@@ -50,17 +49,13 @@ class ThemeManager @Inject constructor(@ApplicationContext private val context: 
 
 
     //______________________________________________________________________________________________ changeApplicationTheme
-    fun changeApplicationTheme() {
-        when (getThemFromSharePreferences()) {
+    fun changeApplicationTheme(theme: Int) {
+        when (theme) {
             Configuration.UI_MODE_NIGHT_YES -> {
-                saveThemeToSharePreferences(Configuration.UI_MODE_NIGHT_NO)
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-            Configuration.UI_MODE_NIGHT_NO -> {
                 saveThemeToSharePreferences(Configuration.UI_MODE_NIGHT_YES)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
-            else -> {
+            Configuration.UI_MODE_NIGHT_NO -> {
                 saveThemeToSharePreferences(Configuration.UI_MODE_NIGHT_NO)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
@@ -70,3 +65,4 @@ class ThemeManager @Inject constructor(@ApplicationContext private val context: 
 
 
 }
+
