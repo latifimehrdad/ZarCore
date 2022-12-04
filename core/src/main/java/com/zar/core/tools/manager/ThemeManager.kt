@@ -16,7 +16,10 @@ import javax.inject.Inject
 
 @Module
 @InstallIn(SingletonComponent::class)
-class ThemeManager @Inject constructor(@ApplicationContext private val context: Context, private val sharedPreferences: SharedPreferences) {
+class ThemeManager @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val sharedPreferences: SharedPreferences
+) {
 
     private val sharePreferencesKey = "themeSharedPreferences"
 

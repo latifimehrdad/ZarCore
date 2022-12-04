@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdk 26
         targetSdk 33
-        versionCode 16
-        versionName "0.1.6"
+        versionCode 17
+        versionName "0.1.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -76,4 +76,5 @@ dependencies {
 
     api 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
+    api "androidx.biometric:biometric-ktx:1.2.0-alpha05"
 }
