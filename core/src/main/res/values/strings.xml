@@ -2,5 +2,21 @@
 <resources>
 
     <string name="biometricNoHardware">دستگاه شما فاقد سنسور اثر انگشت است</string>
+    <string name="confirm">تایید</string>
+
+    <string name="mon">د</string>
+    <string name="tue">س</string>
+    <string name="wed">چ</string>
+    <string name="thu">پ</string>
+    <string name="fri">ج</string>
+    <string name="sat">ش</string>
+    <string name="sun">ی</string>
+
+
+    <string name="done">تایید</string>
+    <string name="title_time_picker">انتخاب زمان</string>
+    <string name="select_time">Select a Time</string>
+    <string name="cancel">انصراف</string>
+
 
 </resources>
