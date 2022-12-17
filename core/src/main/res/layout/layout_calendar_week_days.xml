@@ -6,37 +6,37 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <com.zarholding.zar.view.picker.date.customviews.CustomTextView
+    <com.zar.core.view.picker.date.customviews.CustomTextView
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek1"
         android:text="@string/sat" />
 
-    <com.zarholding.zar.view.picker.date.customviews.CustomTextView
+    <com.zar.core.view.picker.date.customviews.CustomTextView
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek2"
         android:text="@string/sun" />
 
-    <com.zarholding.zar.view.picker.date.customviews.CustomTextView
+    <com.zar.core.view.picker.date.customviews.CustomTextView
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek3"
         android:text="@string/mon" />
 
-    <com.zarholding.zar.view.picker.date.customviews.CustomTextView
+    <com.zar.core.view.picker.date.customviews.CustomTextView
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek4"
         android:text="@string/tue" />
 
-    <com.zarholding.zar.view.picker.date.customviews.CustomTextView
+    <com.zar.core.view.picker.date.customviews.CustomTextView
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek5"
         android:text="@string/wed" />
 
-    <com.zarholding.zar.view.picker.date.customviews.CustomTextView
+    <com.zar.core.view.picker.date.customviews.CustomTextView
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek6"
         android:text="@string/thu" />
 
-    <com.zarholding.zar.view.picker.date.customviews.CustomTextView
+    <com.zar.core.view.picker.date.customviews.CustomTextView
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek7"
         android:text="@string/fri" />
