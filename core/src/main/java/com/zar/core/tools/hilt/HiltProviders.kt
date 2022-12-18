@@ -2,6 +2,7 @@ package com.zar.core.tools.hilt
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.zar.core.tools.loadings.LoadingManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,6 +25,16 @@ class HiltProviders {
         return appContext.getSharedPreferences("secret_shared_prefs", Context.MODE_PRIVATE)
     }
     //---------------------------------------------------------------------------------------------- provideSharedPreferences
+
+
+
+    //---------------------------------------------------------------------------------------------- provideLoadingManager
+    @Provides
+    @Singleton
+    fun provideLoadingManager() : LoadingManager {
+        return LoadingManager()
+    }
+    //---------------------------------------------------------------------------------------------- provideLoadingManager
 
 
 }

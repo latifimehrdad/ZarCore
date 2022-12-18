@@ -6,10 +6,16 @@ import androidx.annotation.ColorRes;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import dagger.Module;
+import dagger.hilt.InstallIn;
+import dagger.hilt.components.SingletonComponent;
+
 /**
  * Created by m-latifi on 11/27/2022.
  */
 
+@Module
+@InstallIn(SingletonComponent.class)
 public class LoadingManager {
 
     private RecyclerViewSkeletonScreen skeletonScreen;
