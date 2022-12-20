@@ -25,9 +25,6 @@ class BiometricTools @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- checkDeviceHasBiometric
     fun checkDeviceHasBiometric(biometricPrompt : BiometricPrompt){
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R)
-            return
-
         val biometricManager = BiometricManager.from(context)
         when (biometricManager.canAuthenticate(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)) {
             BiometricManager.BIOMETRIC_SUCCESS -> {
