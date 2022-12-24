@@ -1,16 +1,13 @@
 package com.zar.core.tools.api
 
-import androidx.lifecycle.liveData
-import com.zar.core.enums.EnumAuthorizationType
-import com.zar.core.enums.EnumErrorType
-import com.zar.core.tools.api.interfaces.RemoteErrorEmitter
+import androidx.lifecycle.MutableLiveData
+import com.zar.core.enums.EnumApiError
+import com.zar.core.models.ErrorApiModel
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout
 import org.json.JSONArray
 import org.json.JSONObject
-import retrofit2.HttpException
 import retrofit2.Response
-import java.io.IOException
 
 /**
  * Create by Mehrdad Latifi on 8/21/2022
@@ -19,63 +16,46 @@ import java.io.IOException
 
 
 //-------------------------------------------------------------------------------------------------- apiCall
-fun <T> apiCall(emitter: RemoteErrorEmitter, responseFunction: suspend () -> T) =  liveData {
-    val response = privateApiCall(emitter) { responseFunction() }
-    emit(response)
-}
+suspend fun <T> apiCall(responseFunction: suspend () -> T) =
+    privateApiCall { responseFunction() }
 //-------------------------------------------------------------------------------------------------- apiCall
 
 
 
 //-------------------------------------------------------------------------------------------------- privateApiCall
 private suspend fun <T> privateApiCall(
-    emitter: RemoteErrorEmitter,
     responseFunction: suspend () -> T
 ) = try {
     withTimeout(60000) {
         responseFunction()
     }
-} catch (e: Exception) {
-    exceptionHandle(e, emitter)
+} catch (e : TimeoutCancellationException) {
     null
 }
 //-------------------------------------------------------------------------------------------------- privateApiCall
 
 
 
-//-------------------------------------------------------------------------------------------------- exceptionHandle
-private fun exceptionHandle(e: Exception, emitter: RemoteErrorEmitter) {
-    when (e) {
-        is HttpException -> httpException(e, emitter)
-        is TimeoutCancellationException -> emitter.onError(EnumErrorType.TimeOut, exceptionMessage(e))
-        is IOException -> emitter.onError(EnumErrorType.Network, "لطفا اتصال دستگاه خود را به اینترنت چک کنید")
-        else -> emitter.onError(EnumErrorType.UNKNOWN, exceptionMessage(e))
+//-------------------------------------------------------------------------------------------------- checkResponseError
+fun checkResponseError(response: Response<*>?, liveData : MutableLiveData<ErrorApiModel>) {
+    val message = responseMessage(response)
+    when(response?.code()) {
+        401 -> {
+            val error = ErrorApiModel(EnumApiError.UnAuthorization, message)
+            liveData.value = error
+        }
+        403 -> {
+            val error = ErrorApiModel(EnumApiError.UnAccess, message)
+            liveData.value = error
+        }
+        else -> {
+            val error = ErrorApiModel(EnumApiError.Error, message)
+            liveData.value = error
+        }
     }
 }
-//-------------------------------------------------------------------------------------------------- exceptionHandle
+//-------------------------------------------------------------------------------------------------- checkResponseError
 
-
-
-//-------------------------------------------------------------------------------------------------- exceptionMessage
-private fun exceptionMessage(exception: Exception) = exception.message?.let {
-    exception.message
-} ?: "متاسفانه خطایی رخ داده، چند دقیقه بعد دوباره تلاش کنید"
-//-------------------------------------------------------------------------------------------------- exceptionMessage
-
-
-
-//-------------------------------------------------------------------------------------------------- httpException
-private fun httpException(e: HttpException, emitter: RemoteErrorEmitter) {
-    when (e.code()) {
-        401 -> emitter.unAuthorization(
-            EnumAuthorizationType.UnAuthorization,
-            responseMessage(e.response())
-        )
-        403 -> emitter.unAuthorization(EnumAuthorizationType.UnAccess, responseMessage(e.response()))
-        else -> emitter.onError(EnumErrorType.UNKNOWN, responseMessage(e.response()))
-    }
-}
-//-------------------------------------------------------------------------------------------------- httpException
 
 
 

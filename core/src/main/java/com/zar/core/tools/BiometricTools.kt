@@ -2,15 +2,12 @@ package com.zar.core.tools
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.provider.Settings
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
 import com.zar.core.R
-import com.zar.core.enums.EnumErrorType
-import com.zar.core.tools.api.interfaces.RemoteErrorEmitter
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -20,21 +17,17 @@ import javax.inject.Inject
 @Module
 @InstallIn(SingletonComponent::class)
 class BiometricTools @Inject constructor(
-    @ApplicationContext private val context: Context,
-    private val emitter: RemoteErrorEmitter) {
+    @ApplicationContext private val context: Context) {
 
     //---------------------------------------------------------------------------------------------- checkDeviceHasBiometric
-    fun checkDeviceHasBiometric(biometricPrompt : BiometricPrompt){
+    fun checkDeviceHasBiometric(biometricPrompt : BiometricPrompt) : String? {
         val biometricManager = BiometricManager.from(context)
-        when (biometricManager.canAuthenticate(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)) {
+        when (biometricManager.canAuthenticate(BIOMETRIC_STRONG)) {
             BiometricManager.BIOMETRIC_SUCCESS -> {
                 showBiometricDialog(biometricPrompt)
             }
             BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> {
-                emitter.onError(
-                    EnumErrorType.UNKNOWN,
-                    context.getString(R.string.biometricNoHardware)
-                )
+                return context.getString(R.string.biometricNoHardware)
             }
             BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
                 val enrollIntent = Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
@@ -44,11 +37,13 @@ class BiometricTools @Inject constructor(
                     )
                 }
                 context.startActivity(enrollIntent)
+                return null
             }
             else -> {
-
+                return null
             }
         }
+        return null
     }
     //---------------------------------------------------------------------------------------------- checkDeviceHasBiometric
 
