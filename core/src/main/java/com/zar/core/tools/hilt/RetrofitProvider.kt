@@ -14,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Type
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -30,13 +31,16 @@ class RetrofitProvider {
     @Provides
     @Singleton
     @Named("Normal")
-    fun provideRetrofit(client: OkHttpClient, @Named("Normal") baseUrl: String, gson: Gson): Retrofit = Retrofit.Builder()
+    fun provideRetrofit(
+        client: OkHttpClient,
+        @Named("Normal") baseUrl: String,
+        gson: Gson
+    ): Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(client)
         .build()
     //---------------------------------------------------------------------------------------------- provideRetrofit
-
 
 
     //---------------------------------------------------------------------------------------------- provideHttpClient
@@ -47,11 +51,14 @@ class RetrofitProvider {
         loggingInterceptor: HttpLoggingInterceptor
     ) = OkHttpClient()
         .newBuilder()
+        .callTimeout(1, TimeUnit.MINUTES)
+        .connectTimeout(20, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(30, TimeUnit.SECONDS)
         .addInterceptor(interceptor)
         .addNetworkInterceptor(loggingInterceptor)
         .build()
     //---------------------------------------------------------------------------------------------- provideHttpClient
-
 
 
     //---------------------------------------------------------------------------------------------- provideInterceptor
@@ -66,25 +73,26 @@ class RetrofitProvider {
     //---------------------------------------------------------------------------------------------- provideInterceptor
 
 
-
     //---------------------------------------------------------------------------------------------- provideLoggingInterceptor
     @Provides
     @Singleton
-    fun provideLoggingInterceptor() = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    fun provideLoggingInterceptor() =
+        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     //---------------------------------------------------------------------------------------------- provideLoggingInterceptor
-
 
 
     //---------------------------------------------------------------------------------------------- provideGson
     @Provides
     @Singleton
-    fun provideGson(): Gson = GsonBuilder().registerTypeAdapter(LocalDateTime::class.java, LocalDateTimeDeserializerManager()).create()
+    fun provideGson(): Gson = GsonBuilder().registerTypeAdapter(
+        LocalDateTime::class.java,
+        LocalDateTimeDeserializerManager()
+    ).create()
     //---------------------------------------------------------------------------------------------- provideGson
-
 
 
     //---------------------------------------------------------------------------------------------- LocalDateTimeDeserializerManager
-    class LocalDateTimeDeserializerManager: JsonDeserializer<LocalDateTime> {
+    class LocalDateTimeDeserializerManager : JsonDeserializer<LocalDateTime> {
         override fun deserialize(
             json: JsonElement?,
             typeOfT: Type?,
