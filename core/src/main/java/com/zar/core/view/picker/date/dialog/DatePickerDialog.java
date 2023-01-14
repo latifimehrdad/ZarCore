@@ -91,15 +91,13 @@ public class DatePickerDialog extends Dialog {
                 } else if (selectionMode == DateRangeCalendarView.SelectionMode.Range) {
                     //region SelectionMode.Range
                     if (startDate != null) {
-                        if (endDate != null) {
-                            if (onRangeDateSelectedListener != null) {
-                                onRangeDateSelectedListener.onRangeDateSelected(startDate, endDate);
-                            }
-
-                            dismiss();
-                        } else {
-                            MyUtils.getInstance().Toast(mContext, "لطفا بازه زمانی را مشخص کنید");
+                        if (endDate == null) {
+                            endDate = startDate;
                         }
+                        if (onRangeDateSelectedListener != null) {
+                            onRangeDateSelectedListener.onRangeDateSelected(startDate, endDate);
+                        }
+                        dismiss();
                     } else {
                         MyUtils.getInstance().Toast(mContext, "لطفا بازه زمانی را مشخص کنید");
                     }

@@ -1,9 +1,6 @@
 package com.zar.app
 
-import android.content.ContentValues
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.elvishew.xlog.LogConfiguration
@@ -23,21 +20,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val  media = File(
+/*        val media = File(
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
             "zarlog"
-        )
+        )*/
 
+        val media = File(cacheDir,"zarlog")
+/*        val files: Array<File> = media.listFiles() as Array<File>
+        for (element in files) {
+            Log.d("meri", "FileName:" + element.name)
+            val temp = element.bufferedReader()
+            val inputString = temp.use { it.readText() }
+            Log.e("meri", inputString)
+        }*/
 
         val config = LogConfiguration.Builder()
             .logLevel(
                 if (BuildConfig.DEBUG) LogLevel.ALL // Specify log level, logs below this level won't be printed, default: LogLevel.ALL
-                else LogLevel.NONE
+                else LogLevel.ALL
             )
             .tag("X-LOG") // Specify TAG, default: "X-LOG"
-            .enableThreadInfo() // Enable thread info, disabled by default
-            .enableStackTrace(2) // Enable stack trace info with depth 2, disabled by default
-            .enableBorder() // Enable border, disabled by default
+            .enableStackTrace(1) // Enable stack trace info with depth 2, disabled by default
             .build()
 
         val androidPrinter: Printer =
@@ -52,54 +55,17 @@ class MainActivity : AppCompatActivity() {
                 .backupStrategy(NeverBackupStrategy()) // Default: FileSizeBackupStrategy(1024 * 1024)
                 .build()
 
-
         XLog.init(                                                 // Initialize XLog
             config,                                                // Specify the log configuration, if not specified, will use new LogConfiguration.Builder().build()
             androidPrinter,                                        // Specify printers, if no printer is specified, AndroidPrinter(for Android)/ConsolePrinter(for java) will be used.
             consolePrinter,
-            filePrinter)
+            filePrinter
+        )
 
+        XLog.d("this line is ok")
 
-
-/*        Dexter.withContext(this)
-            .withPermissions(
-               Manifest.permission.READ_EXTERNAL_STORAGE
-            )
-            .withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    p0: MutableList<PermissionRequest>?,
-                    p1: PermissionToken?
-                ) {
-
-                }
-            }).check()*/
-
-
-
-        XLog.d("hello xlog")
+/*        XLog.d("hello xlog")
         XLog.d("hello word")
-        XLog.d("hello mehrdad")
-
-//        val file = File(cacheDir, "xlog.txt")
-//        if (file.exists()) {
-//            val dir = File(cacheDir.toURI())
-//            if (dir.exists()) {
-//                for (f in dir.listFiles()) {
-//                    Log.i("X-LOG", f.path)
-//
-//
-//                }
-//            }
-
-//            Log.i("X-LOG", sp.toString())
-//            val uri = FileProvider.getUriForFile(this, "com.zar.app.fileprovider", file)
-
-//        }
-
-
+        XLog.d("hello mehrdad")*/
     }
 }

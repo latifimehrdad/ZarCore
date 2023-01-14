@@ -30,10 +30,9 @@ class RetrofitProvider {
     //---------------------------------------------------------------------------------------------- provideRetrofit
     @Provides
     @Singleton
-    @Named("Normal")
     fun provideRetrofit(
         client: OkHttpClient,
-        @Named("Normal") baseUrl: String,
+        baseUrl: String,
         gson: Gson
     ): Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
@@ -52,9 +51,9 @@ class RetrofitProvider {
     ) = OkHttpClient()
         .newBuilder()
         .callTimeout(1, TimeUnit.MINUTES)
-        .connectTimeout(20, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
-        .writeTimeout(30, TimeUnit.SECONDS)
+        .connectTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(15, TimeUnit.SECONDS)
+        .writeTimeout(15, TimeUnit.SECONDS)
         .addInterceptor(interceptor)
         .addNetworkInterceptor(loggingInterceptor)
         .build()

@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TimePicker;
@@ -16,9 +15,10 @@ import java.util.Calendar;
 
 
 public class TimePickerDialog extends Dialog {
-    private CustomTextView tvHeaderTitle, tvDialogDone, tvDialogCancel;
+    private CustomTextView tvDialogDone;
+    private CustomTextView tvDialogCancel;
 
-    private String mTitle;
+    private final String mTitle;
     private int hours, minutes;
 
     private TimePicker timePicker;
@@ -29,7 +29,7 @@ public class TimePickerDialog extends Dialog {
         void onCancel();
     }
 
-    private TimePickerCallback onTimeChangedListener;
+    private final TimePickerCallback onTimeChangedListener;
 
     public TimePickerDialog(Context context, String title, TimePickerCallback timePickerCallback) {
         super(context);
@@ -59,42 +59,33 @@ public class TimePickerDialog extends Dialog {
     private void initView() {
         setContentView(R.layout.dialog_time_picker);
 
-        tvHeaderTitle = findViewById(R.id.tvHeaderTitle);
+        CustomTextView tvHeaderTitle = findViewById(R.id.tvHeaderTitle);
         tvDialogDone = findViewById(R.id.tvHeaderDone);
         tvDialogCancel = findViewById(R.id.tvHeaderCancel);
 
         timePicker = findViewById(R.id.timePicker);
 
-        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                hours = hourOfDay;
-                minutes = minute;
-            }
+        timePicker.setOnTimeChangedListener((view, hourOfDay, minute) -> {
+            hours = hourOfDay;
+            minutes = minute;
         });
 
         tvHeaderTitle.setText(mTitle);
     }
 
     private void setListeners() {
-        tvDialogCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onTimeChangedListener != null) {
-                    onTimeChangedListener.onCancel();
-                }
-                TimePickerDialog.this.dismiss();
+        tvDialogCancel.setOnClickListener(v -> {
+            if (onTimeChangedListener != null) {
+                onTimeChangedListener.onCancel();
             }
+            TimePickerDialog.this.dismiss();
         });
 
-        tvDialogDone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onTimeChangedListener != null) {
-                    onTimeChangedListener.onTimeSelected(hours, minutes);
-                }
-                TimePickerDialog.this.dismiss();
+        tvDialogDone.setOnClickListener(v -> {
+            if (onTimeChangedListener != null) {
+                onTimeChangedListener.onTimeSelected(hours, minutes);
             }
+            TimePickerDialog.this.dismiss();
         });
     }
 

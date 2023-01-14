@@ -32,8 +32,8 @@ import java.util.Locale;
 
 public class DateRangeCalendarView extends LinearLayout {
     //region Fields
-    private Context mContext;
-    private AttributeSet attrs;
+    private final Context mContext;
+    private final AttributeSet attrs;
     private LinearLayout llDaysContainer;
     private LinearLayout llTitleWeekContainer;
     private CustomTextView tvYearTitle;
@@ -41,7 +41,7 @@ public class DateRangeCalendarView extends LinearLayout {
     private ImageView imgVNavLeft, imgVNavRight;
     private Locale locale;
     private PersianCalendar currentCalendarMonth, minSelectedDate, maxSelectedDate;
-    private ArrayList<Integer> selectedDatesRange = new ArrayList<>();
+    private final ArrayList<Integer> selectedDatesRange = new ArrayList<>();
     private Typeface typeface;
     private ConstraintLayout rlHeaderCalendar;
 
@@ -743,8 +743,6 @@ public class DateRangeCalendarView extends LinearLayout {
         rlHeaderCalendar.setBackgroundColor(headerBackgroundColor);
         tvYearTitle.setTextColor(headerTextColor);
         tvYearGeorgianTitle.setTextColor(headerTextColor);
-        imgVNavLeft.setColorFilter(headerTextColor, android.graphics.PorterDuff.Mode.MULTIPLY);
-        imgVNavRight.setColorFilter(headerTextColor, android.graphics.PorterDuff.Mode.MULTIPLY);
     }
 
     //region selectionMode -> Getter/Setter
