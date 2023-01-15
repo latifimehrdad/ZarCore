@@ -350,11 +350,12 @@ public class DateRangeCalendarView extends LinearLayout {
 
     public boolean selectOneDateInRangeType() {
         if (minSelectedDate != null)
-            if (calendarListener != null) {
-                maxSelectedDate = minSelectedDate;
-                calendarListener.onDateRangeSelected(minSelectedDate, maxSelectedDate);
-                return true;
-            }
+            if (maxSelectedDate == null)
+                if (calendarListener != null) {
+                    maxSelectedDate = minSelectedDate;
+                    calendarListener.onDateRangeSelected(minSelectedDate, maxSelectedDate);
+                    return true;
+                }
 
         return false;
     }

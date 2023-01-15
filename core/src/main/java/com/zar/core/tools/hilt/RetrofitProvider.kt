@@ -50,10 +50,7 @@ class RetrofitProvider {
         loggingInterceptor: HttpLoggingInterceptor
     ) = OkHttpClient()
         .newBuilder()
-        .callTimeout(1, TimeUnit.MINUTES)
-        .connectTimeout(15, TimeUnit.SECONDS)
-        .readTimeout(15, TimeUnit.SECONDS)
-        .writeTimeout(15, TimeUnit.SECONDS)
+        .connectTimeout(20, TimeUnit.SECONDS)
         .addInterceptor(interceptor)
         .addNetworkInterceptor(loggingInterceptor)
         .build()
