@@ -347,6 +347,19 @@ public class DateRangeCalendarView extends LinearLayout {
     //endregion
     //---------------------------------------------------------------------------------------------
 
+
+    public boolean selectOneDateInRangeType() {
+        if (minSelectedDate != null)
+            if (calendarListener != null) {
+                maxSelectedDate = minSelectedDate;
+                calendarListener.onDateRangeSelected(minSelectedDate, maxSelectedDate);
+                return true;
+            }
+
+        return false;
+    }
+
+
     /**
      * To clone calendar obj and get current month calendar starting from 1st date.
      *
