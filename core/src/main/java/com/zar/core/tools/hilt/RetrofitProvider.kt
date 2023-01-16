@@ -62,11 +62,10 @@ class RetrofitProvider {
     @Provides
     @Singleton
     fun provideInterceptor() = Interceptor { chain ->
-        val originalResponse = chain.proceed(chain.request())
-        originalResponse.newBuilder()
+        val newRequest: Request = chain.request().newBuilder()
             .addHeader("device", "android")
-            .body(ProgressResponseBody(originalResponse.body!!) { _, _, _ -> })
             .build()
+        chain.proceed(newRequest)
     }
     //---------------------------------------------------------------------------------------------- provideInterceptor
 
