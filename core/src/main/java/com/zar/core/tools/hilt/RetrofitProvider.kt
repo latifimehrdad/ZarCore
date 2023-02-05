@@ -15,11 +15,9 @@ import java.lang.reflect.Type
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
-import javax.inject.Named
 import javax.inject.Singleton
 
 /**
- * Create by Mehrdad Latifi on 8/21/2022
  * Create by Mehrdad Latifi on 8/21/2022
  */
 
@@ -42,6 +40,7 @@ class RetrofitProvider {
     //---------------------------------------------------------------------------------------------- provideRetrofit
 
 
+
     //---------------------------------------------------------------------------------------------- provideHttpClient
     @Provides
     @Singleton
@@ -50,7 +49,9 @@ class RetrofitProvider {
         loggingInterceptor: HttpLoggingInterceptor
     ) = OkHttpClient()
         .newBuilder()
-        .connectTimeout(20, TimeUnit.SECONDS)
+        .connectTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(15, TimeUnit.SECONDS)
+        .writeTimeout(15, TimeUnit.SECONDS)
         .addInterceptor(interceptor)
         .addNetworkInterceptor(loggingInterceptor)
         .build()
