@@ -28,6 +28,7 @@ class ZarTimePicker @JvmOverloads constructor(
     }
 
     enum class PickerMode {
+        TIME,
         DEPARTURE,
         RETURN,
         RETURNING
@@ -96,7 +97,10 @@ class ZarTimePicker @JvmOverloads constructor(
         if (attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.TimePicker)
 
-            departureLayoutId = a.getResourceId(R.styleable.TimePicker_departureLayoutId, 0)
+            departureLayoutId = if (pickerMode == PickerMode.TIME)
+                a.getResourceId(R.styleable.TimePicker_timeLayoutId, 0)
+            else
+                a.getResourceId(R.styleable.TimePicker_departureLayoutId, 0)
             returnLayoutId = a.getResourceId(R.styleable.TimePicker_returnLayoutId, 0)
 
             progressColor = a.getColor(R.styleable.TimePicker_progressColor, progressColor)
@@ -191,7 +195,8 @@ class ZarTimePicker @JvmOverloads constructor(
         returnLayout = inflater.inflate(returnLayoutId, this, false)
 
         when(pickerMode) {
-            PickerMode.DEPARTURE -> addView(departureLayout)
+            PickerMode.DEPARTURE,
+            PickerMode.TIME-> addView(departureLayout)
             PickerMode.RETURN -> addView(returnLayout)
             PickerMode.RETURNING -> {
                 addView(departureLayout)
@@ -222,7 +227,8 @@ class ZarTimePicker @JvmOverloads constructor(
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         when(pickerMode) {
-            PickerMode.DEPARTURE -> layoutView(departureLayout, departureAngle)
+            PickerMode.DEPARTURE,
+            PickerMode.TIME-> layoutView(departureLayout, departureAngle)
             PickerMode.RETURN -> layoutView(returnLayout, returnAngle)
             PickerMode.RETURNING -> {
                 layoutView(departureLayout, departureAngle)

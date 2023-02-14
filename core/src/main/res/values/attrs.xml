@@ -14,6 +14,7 @@
         <attr name="strokeTopShadowColor" format="color" />
         <attr name="labelColor" format="color" />
         <attr name="labelFont" format="reference" />
+        <attr name="timeLayoutId" format="reference" />
         <attr name="departureLayoutId" format="reference" />
         <attr name="returnLayoutId" format="reference" />
 
