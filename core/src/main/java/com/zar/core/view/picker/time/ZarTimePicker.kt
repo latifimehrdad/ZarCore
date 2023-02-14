@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -53,6 +54,7 @@ class ZarTimePicker @JvmOverloads constructor(
     private var strokeBottomShadowColor = Color.TRANSPARENT
     private var strokeTopShadowColor = Color.TRANSPARENT
     private var labelColor = Color.WHITE
+    private lateinit var timeLayout: View
     private lateinit var departureLayout: View
     private lateinit var returnLayout: View
     private var departureAngle = 30.0
@@ -61,6 +63,7 @@ class ZarTimePicker @JvmOverloads constructor(
     private var draggingReturn = false
     private val stepMinutes = 15
     private val textRect = Rect()
+    private var timeLayoutId = 0
     private var departureLayoutId = 0
     private var returnLayoutId = 0
 
@@ -75,6 +78,11 @@ class ZarTimePicker @JvmOverloads constructor(
         departureAngle = Utils.minutesToAngle(departureTime.hour * 60 + departureTime.minute)
         returnAngle = Utils.minutesToAngle(returnTime.hour * 60 + returnTime.minute)
         Companion.pickerMode = pickerMode
+        if (pickerMode == PickerMode.TIME) {
+            removeView(departureLayout)
+            departureLayout = timeLayout
+            addView(departureLayout)
+        }
         invalidate()
         notifyChanges()
     }
@@ -97,10 +105,8 @@ class ZarTimePicker @JvmOverloads constructor(
         if (attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.TimePicker)
 
-            departureLayoutId = if (pickerMode == PickerMode.TIME)
-                a.getResourceId(R.styleable.TimePicker_timeLayoutId, 0)
-            else
-                a.getResourceId(R.styleable.TimePicker_departureLayoutId, 0)
+            timeLayoutId = a.getResourceId(R.styleable.TimePicker_timeLayoutId, 0)
+            departureLayoutId = a.getResourceId(R.styleable.TimePicker_departureLayoutId, 0)
             returnLayoutId = a.getResourceId(R.styleable.TimePicker_returnLayoutId, 0)
 
             progressColor = a.getColor(R.styleable.TimePicker_progressColor, progressColor)
@@ -191,6 +197,7 @@ class ZarTimePicker @JvmOverloads constructor(
         textPaint.color = labelColor
 
         val inflater = LayoutInflater.from(context)
+        timeLayout = inflater.inflate(timeLayoutId, this, false)
         departureLayout = inflater.inflate(departureLayoutId, this, false)
         returnLayout = inflater.inflate(returnLayoutId, this, false)
 
