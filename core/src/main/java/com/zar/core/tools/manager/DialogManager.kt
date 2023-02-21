@@ -39,7 +39,7 @@ class DialogManager {
 
 
     //---------------------------------------------------------------------------------------------- createDialogHeightMatchParent
-    fun createDialogHeightMatchParent(context: Context, layout: Int): Dialog {
+    fun createDialogHeightMatchParent(context: Context, layout: Int, margin: Float): Dialog {
         val dialog = Dialog(context)
         dialog.setCancelable(false)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -51,9 +51,9 @@ class DialogManager {
         window!!.setBackgroundDrawable(inset)
         lp.copyFrom(window.attributes)
         lp.width = WindowManager.LayoutParams.MATCH_PARENT
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT
         lp.horizontalMargin = 50f
-        lp.verticalMargin = 50f
+        lp.verticalMargin = margin
         window.attributes = lp
         return dialog
     }

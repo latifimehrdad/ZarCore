@@ -42,15 +42,15 @@ fun checkResponseError(response: Response<*>?, liveData : MutableLiveData<ErrorA
     when(response?.code()) {
         401 -> {
             val error = ErrorApiModel(EnumApiError.UnAuthorization, message)
-            liveData.value = error
+            liveData.postValue(error)
         }
         403 -> {
             val error = ErrorApiModel(EnumApiError.UnAccess, message)
-            liveData.value = error
+            liveData.postValue(error)
         }
         else -> {
             val error = ErrorApiModel(EnumApiError.Error, message)
-            liveData.value = error
+            liveData.postValue(error)
         }
     }
 }
