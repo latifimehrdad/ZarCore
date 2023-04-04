@@ -3,7 +3,6 @@ package com.zar.core.tools.hilt
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.*
-import com.zar.core.tools.loadings.LoadingManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -53,9 +52,7 @@ class HiltProviders {
         loggingInterceptor: HttpLoggingInterceptor
     ) = OkHttpClient()
         .newBuilder()
-        .connectTimeout(0, TimeUnit.SECONDS)
-        .readTimeout(0, TimeUnit.SECONDS)
-        .writeTimeout(0, TimeUnit.SECONDS)
+        .connectTimeout(30, TimeUnit.SECONDS)
         .addInterceptor(interceptor)
         .addNetworkInterceptor(loggingInterceptor)
         .build()
@@ -101,15 +98,6 @@ class HiltProviders {
     }
     //---------------------------------------------------------------------------------------------- provideSharedPreferences
 
-
-
-    //---------------------------------------------------------------------------------------------- provideLoadingManager
-    @Provides
-    @Singleton
-    fun provideLoadingManager() : LoadingManager {
-        return LoadingManager()
-    }
-    //---------------------------------------------------------------------------------------------- provideLoadingManager
 
 
     //---------------------------------------------------------------------------------------------- LocalDateTimeDeserializerManager
