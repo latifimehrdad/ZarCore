@@ -23,7 +23,7 @@ public abstract class SliderViewAdapter<VH extends SliderViewAdapter.ViewHolder>
         }
     }
 
-    private Queue<VH> destroyedItems = new LinkedList<>();
+    private final Queue<VH> destroyedItems = new LinkedList<>();
 
     @NonNull
     @Override
@@ -51,7 +51,7 @@ public abstract class SliderViewAdapter<VH extends SliderViewAdapter.ViewHolder>
     }
 
     @Override
-    public int getItemPosition(Object object) {
+    public int getItemPosition(@NonNull Object object) {
         return POSITION_NONE;
     }
 

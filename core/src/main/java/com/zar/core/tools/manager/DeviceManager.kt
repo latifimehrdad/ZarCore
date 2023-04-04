@@ -13,8 +13,10 @@ class DeviceManager(private val context: Context) {
     //---------------------------------------------------------------------------------------------- appVersionCode
     fun appVersionCode(): Long = try {
         if (Build.VERSION.SDK_INT >= 28)
+            @Suppress("DEPRECATION")
             context.packageManager.getPackageInfo(context.packageName, 0).longVersionCode
         else
+            @Suppress("DEPRECATION")
             context.packageManager.getPackageInfo(context.packageName, 0).versionCode.toLong()
     } catch (E: Exception) {
         0
@@ -24,6 +26,7 @@ class DeviceManager(private val context: Context) {
 
     //---------------------------------------------------------------------------------------------- appVersionName
     fun appVersionName(): String = try {
+        @Suppress("DEPRECATION")
         context.packageManager.getPackageInfo(context.packageName, 0).versionName
     } catch (E: Exception) {
         "0.0.0"
