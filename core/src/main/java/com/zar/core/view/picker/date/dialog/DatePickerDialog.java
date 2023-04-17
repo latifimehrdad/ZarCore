@@ -8,7 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
 
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.zar.core.R;
@@ -22,6 +26,10 @@ public class DatePickerDialog extends Dialog {
     private Context mContext;
     private DateRangeCalendarView calendar;
     private Button btn_Accept;
+    private ImageView imageViewClose, imageViewAccept;
+    private CardView cardViewChangeDate;
+    private EditText editTextYear;
+    private Spinner spinnerMonth;
     private PersianCalendar date, startDate, endDate;
     private Typeface typeface;
     //endregion
@@ -47,6 +55,11 @@ public class DatePickerDialog extends Dialog {
         setContentView(R.layout.dialog_date_picker);
 
         btn_Accept = findViewById(R.id.btn_Accept);
+        imageViewClose = findViewById(R.id.imageViewClose);
+        imageViewAccept = findViewById(R.id.imageViewAccept);
+        cardViewChangeDate = findViewById(R.id.cardViewChangeDate);
+        spinnerMonth = findViewById(R.id.spinnerMonth);
+        editTextYear = findViewById(R.id.editTextYear);
 
         acceptButtonColor = ContextCompat.getColor(mContext, R.color.buttonBackgroundColor);
 //        calendar = findViewById(R.id.calendar);
@@ -73,42 +86,43 @@ public class DatePickerDialog extends Dialog {
             }
         });
 
-        btn_Accept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selectionMode == DateRangeCalendarView.SelectionMode.Single) {
-                    //region SelectionMode.Single
-                    if (date != null) {
-                        if (onSingleDateSelectedListener != null) {
-                            onSingleDateSelectedListener.onSingleDateSelected(date);
-                        }
+        imageViewClose.setOnClickListener(v -> cardViewChangeDate.setVisibility(View.GONE));
 
-                        dismiss();
-                    } else {
-                        MyUtils.getInstance().Toast(mContext, "لطفا یک تاریخ انتخاب کنید");
+
+
+        btn_Accept.setOnClickListener(v -> {
+            if (selectionMode == DateRangeCalendarView.SelectionMode.Single) {
+                //region SelectionMode.Single
+                if (date != null) {
+                    if (onSingleDateSelectedListener != null) {
+                        onSingleDateSelectedListener.onSingleDateSelected(date);
                     }
-                    //endregion
-                } else if (selectionMode == DateRangeCalendarView.SelectionMode.Range) {
-                    //region SelectionMode.Range
-                    if (calendar.selectOneDateInRangeType()) {
+
+                    dismiss();
+                } else {
+                    MyUtils.getInstance().Toast(mContext, "لطفا یک تاریخ انتخاب کنید");
+                }
+                //endregion
+            } else if (selectionMode == DateRangeCalendarView.SelectionMode.Range) {
+                //region SelectionMode.Range
+                if (calendar.selectOneDateInRangeType()) {
+                    if (onRangeDateSelectedListener != null) {
+                        onRangeDateSelectedListener.onRangeDateSelected(startDate, endDate);
+                    }
+                    dismiss();
+                } else {
+                    if (startDate != null) {
+                        if (endDate == null) {
+                            endDate = startDate;
+                        }
                         if (onRangeDateSelectedListener != null) {
                             onRangeDateSelectedListener.onRangeDateSelected(startDate, endDate);
                         }
                         dismiss();
                     } else {
-                        if (startDate != null) {
-                            if (endDate == null) {
-                                endDate = startDate;
-                            }
-                            if (onRangeDateSelectedListener != null) {
-                                onRangeDateSelectedListener.onRangeDateSelected(startDate, endDate);
-                            }
-                            dismiss();
-                        } else {
-                            MyUtils.getInstance().Toast(mContext, "لطفا بازه زمانی را مشخص کنید");
-                        }
-                        //endregion
+                        MyUtils.getInstance().Toast(mContext, "لطفا بازه زمانی را مشخص کنید");
                     }
+                    //endregion
                 }
             }
         });
@@ -143,6 +157,10 @@ public class DatePickerDialog extends Dialog {
         calendar.setAttributes();
         calendar.build();
 
+        calendar.getYearTitle().setOnClickListener(v -> showDateChange());
+
+        calendar.getTvYearGeorgianTitle().setOnClickListener(v -> showDateChange());
+
         ViewGroup insertPoint = findViewById(R.id.content);
 
         if (insertPoint.getChildCount() > 0) {
@@ -160,6 +178,29 @@ public class DatePickerDialog extends Dialog {
 
         this.show();
     }
+
+    private void showDateChange() {
+        editTextYear.setTypeface(typeface);
+        cardViewChangeDate.setVisibility(View.VISIBLE);
+        editTextYear.getText().clear();
+        cardViewChangeDate.setOnClickListener(v -> cardViewChangeDate.setVisibility(View.GONE));
+        imageViewAccept.setOnClickListener(v -> {
+            if (editTextYear.getText().toString().isEmpty())
+                return;
+            try {
+                int year = Integer.parseInt(editTextYear.getText().toString());
+                PersianCalendar today = new PersianCalendar();
+                today.setPersianDate(year,spinnerMonth.getSelectedItemPosition(),1);
+                calendar.setCurrentDate(today);
+                calendar.build();
+                cardViewChangeDate.setVisibility(View.GONE);
+            }catch (Exception e){
+                cardViewChangeDate.setVisibility(View.GONE);
+            }
+        });
+
+    }
+
 
     //region Properties
     //region DisableDaysAgo -> Default = True

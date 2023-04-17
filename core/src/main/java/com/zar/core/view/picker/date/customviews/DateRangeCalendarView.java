@@ -184,6 +184,12 @@ public class DateRangeCalendarView extends LinearLayout {
     }
     //endregion
 
+
+    public TextView getYearTitle() {
+        return tvYearTitle;
+    }
+    public TextView getTvYearGeorgianTitle(){ return tvYearGeorgianTitle; }
+
     //region Core
     //region NavigationClickListener & dayClickListener
     private void nextMonth() {

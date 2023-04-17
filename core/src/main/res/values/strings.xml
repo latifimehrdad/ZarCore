@@ -13,10 +13,25 @@
     <string name="sun">ی</string>
 
 
+    <string name="year">سال</string>
     <string name="done">تایید</string>
     <string name="title_time_picker">انتخاب زمان</string>
     <string name="select_time">Select a Time</string>
     <string name="cancel">انصراف</string>
 
+    <string-array name="months">
+        <item>فروردین</item>
+        <item>اردیبهشت</item>
+        <item>خرداد</item>
+        <item>تیر</item>
+        <item>مرداد</item>
+        <item>شهریور</item>
+        <item>مهر</item>
+        <item>آبان</item>
+        <item>آذر</item>
+        <item>دی</item>
+        <item>بهمن</item>
+        <item>اسفند</item>
+    </string-array>
 
 </resources>
