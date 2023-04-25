@@ -2,7 +2,9 @@ package com.zar.core.tools.hilt
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.MutableLiveData
 import com.google.gson.*
+import com.zar.core.models.ProgressResponseModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -65,13 +67,29 @@ class HiltProviders {
     //---------------------------------------------------------------------------------------------- provideInterceptor
     @Provides
     @Singleton
-    fun provideInterceptor() = Interceptor { chain ->
+    fun provideInterceptor(
+        liveData : MutableLiveData<ProgressResponseModel>
+    ) = Interceptor { chain ->
         val newRequest: Request = chain.request().newBuilder()
             .addHeader("device", "android")
             .build()
-        chain.proceed(newRequest)
+        val originalResponse = chain.proceed(newRequest)
+        originalResponse.newBuilder()
+            .body(ProgressResponseBody(originalResponse.body!!) { bytesRead, contentLength, isDone ->
+                val model = ProgressResponseModel(bytesRead, contentLength, isDone)
+                liveData.postValue(model)
+            })
+            .build()
     }
     //---------------------------------------------------------------------------------------------- provideInterceptor
+
+
+    //---------------------------------------------------------------------------------------------- provideLiveDataProgressResponse
+    @Provides
+    @Singleton
+    fun provideLiveDataProgressResponse() = MutableLiveData<ProgressResponseModel>()
+    //---------------------------------------------------------------------------------------------- provideLiveDataProgressResponse
+
 
 
     //---------------------------------------------------------------------------------------------- provideLoggingInterceptor
