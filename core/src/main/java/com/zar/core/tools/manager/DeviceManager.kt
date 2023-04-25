@@ -2,13 +2,21 @@ package com.zar.core.tools.manager
 
 import android.content.Context
 import android.os.Build
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import java.util.*
+import javax.inject.Inject
 
 /**
  * Create by Mehrdad Latifi on 8/22/2022
  */
 
-class DeviceManager(private val context: Context) {
+@Module
+@InstallIn(SingletonComponent::class)
+class DeviceManager@Inject constructor(
+    @ApplicationContext private val context: Context) {
 
     //---------------------------------------------------------------------------------------------- appVersionCode
     fun appVersionCode(): Long = try {

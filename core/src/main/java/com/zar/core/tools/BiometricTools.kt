@@ -53,7 +53,6 @@ class BiometricTools @Inject constructor(
     private fun showBiometricDialog(biometricPrompt : BiometricPrompt) {
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("ورود با اثر انگشت")
-            .setSubtitle("نرم افزار جامع گروه صنعتی زر")
             .setNegativeButtonText("انصراف")
             .build()
         biometricPrompt.authenticate(promptInfo)
