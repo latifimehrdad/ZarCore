@@ -97,7 +97,6 @@ public class DateRangeCalendarView extends LinearLayout {
     private void initView() {
         typeface = FontUtils.Default(mContext);
         locale = mContext.getResources().getConfiguration().locale;
-
         setDefaultValues();
 
         setAttributes();

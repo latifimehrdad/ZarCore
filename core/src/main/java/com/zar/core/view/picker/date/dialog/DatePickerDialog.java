@@ -2,11 +2,15 @@ package com.zar.core.view.picker.date.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.InsetDrawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,13 +43,16 @@ public class DatePickerDialog extends Dialog {
         mContext = context;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        if (getWindow() != null)
-            getWindow().setGravity(Gravity.CENTER);
+        if (getWindow() != null) {
+            ColorDrawable color = new ColorDrawable(Color.TRANSPARENT);
+            InsetDrawable drawable = new InsetDrawable(color, 50);
+            getWindow().setBackgroundDrawable(drawable);
+        }
+
 
         this.typeface = FontUtils.Default(mContext);
 
         initView();
-
         PersianCalendar today = new PersianCalendar();
         setCurrentDate(today);
     }
@@ -62,6 +69,7 @@ public class DatePickerDialog extends Dialog {
         editTextYear = findViewById(R.id.editTextYear);
 
         acceptButtonColor = ContextCompat.getColor(mContext, R.color.buttonBackgroundColor);
+
 //        calendar = findViewById(R.id.calendar);
         //endregion
     }

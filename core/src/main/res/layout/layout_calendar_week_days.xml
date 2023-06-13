@@ -8,37 +8,65 @@
 
     <com.zar.core.view.picker.date.customviews.CustomTextView
         style="@style/WeekDayTitleStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:tag="dayOfWeek1"
-        android:text="@string/sat" />
+        android:text="@string/sat"
+        android:paddingVertical="@dimen/_5sdp"/>
 
     <com.zar.core.view.picker.date.customviews.CustomTextView
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek2"
-        android:text="@string/sun" />
+        android:text="@string/sun"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingVertical="@dimen/_5sdp"/>
 
     <com.zar.core.view.picker.date.customviews.CustomTextView
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek3"
-        android:text="@string/mon" />
+        android:text="@string/mon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingVertical="@dimen/_5sdp"/>
 
     <com.zar.core.view.picker.date.customviews.CustomTextView
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek4"
-        android:text="@string/tue" />
+        android:text="@string/tue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingVertical="@dimen/_5sdp"/>
 
     <com.zar.core.view.picker.date.customviews.CustomTextView
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek5"
-        android:text="@string/wed" />
+        android:text="@string/wed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingVertical="@dimen/_5sdp"/>
 
     <com.zar.core.view.picker.date.customviews.CustomTextView
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek6"
-        android:text="@string/thu" />
+        android:text="@string/thu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingVertical="@dimen/_5sdp"/>
 
     <com.zar.core.view.picker.date.customviews.CustomTextView
         style="@style/WeekDayTitleStyle"
         android:tag="dayOfWeek7"
-        android:text="@string/fri" />
+        android:text="@string/fri"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingVertical="@dimen/_5sdp"/>
 
 </LinearLayout>
