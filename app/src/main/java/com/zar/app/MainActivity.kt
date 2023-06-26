@@ -3,19 +3,8 @@ package com.zar.app
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.elvishew.xlog.LogConfiguration
-import com.elvishew.xlog.LogLevel
-import com.elvishew.xlog.XLog
-import com.elvishew.xlog.printer.AndroidPrinter
-import com.elvishew.xlog.printer.ConsolePrinter
-import com.elvishew.xlog.printer.Printer
-import com.elvishew.xlog.printer.file.FilePrinter
-import com.elvishew.xlog.printer.file.backup.NeverBackupStrategy
-import com.elvishew.xlog.printer.file.naming.DateFileNameGenerator
-import com.zar.core.BuildConfig
 import com.zar.core.view.picker.date.customviews.DateRangeCalendarView
 import com.zar.core.view.picker.date.dialog.DatePickerDialog
-import java.io.File
 
 
 class MainActivity : AppCompatActivity() {

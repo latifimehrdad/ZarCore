@@ -6,13 +6,13 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
     namespace 'com.zar.core'
     defaultConfig {
         minSdk 26
-        targetSdk 33
-        versionCode 42
-        versionName "0.4.2"
+        targetSdk 34
+        versionCode 44
+        versionName "0.4.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -24,11 +24,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '17'
     }
 }
 
@@ -44,7 +44,7 @@ dependencies {
     api 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    api "androidx.fragment:fragment-ktx:1.5.6"
+    api "androidx.fragment:fragment-ktx:1.6.0"
     api 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
 
 
@@ -61,8 +61,8 @@ dependencies {
 
 
     //navigation component
-    api("androidx.navigation:navigation-fragment-ktx:2.5.3")
-    api("androidx.navigation:navigation-ui-ktx:2.5.3")
+    api("androidx.navigation:navigation-fragment-ktx:2.6.0")
+    api("androidx.navigation:navigation-ui-ktx:2.6.0")
 
     //shimmer loading
     api 'com.facebook.shimmer:shimmer:0.5.0'
