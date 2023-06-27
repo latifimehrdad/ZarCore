@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="biometricNoHardware">ورود بیومتریک روی دستگاه شما پیدا نشد</string>
+    <string name="biometricNoHardware">ورود بایومتریک روی دستگاه شما پیدا نشد</string>
     <string name="confirm">تایید</string>
+    <string name="confirmChangeDate">تغییر تاریخ</string>
+    <string name="pleaseEnterYear">لطفا سال را وارد نمایید</string>
 
     <string name="mon">د</string>
     <string name="tue">س</string>

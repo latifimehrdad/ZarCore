@@ -17,8 +17,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.button.MaterialButton;
 import com.zar.core.R;
 import com.zar.core.view.picker.date.customviews.DateRangeCalendarView;
 import com.zar.core.view.picker.date.utils.FontUtils;
@@ -30,12 +32,14 @@ public class DatePickerDialog extends Dialog {
     private Context mContext;
     private DateRangeCalendarView calendar;
     private Button btn_Accept;
-    private ImageView imageViewClose, imageViewAccept;
+    private ImageView imageViewClose;
     private CardView cardViewChangeDate;
+    private ConstraintLayout constraintLayoutChange;
     private EditText editTextYear;
     private Spinner spinnerMonth;
     private PersianCalendar date, startDate, endDate;
     private Typeface typeface;
+    private MaterialButton btmConfirmChange;
     //endregion
 
     public DatePickerDialog(Context context) {
@@ -63,8 +67,9 @@ public class DatePickerDialog extends Dialog {
 
         btn_Accept = findViewById(R.id.btn_Accept);
         imageViewClose = findViewById(R.id.imageViewClose);
-        imageViewAccept = findViewById(R.id.imageViewAccept);
+        btmConfirmChange = findViewById(R.id.btmConfirmChange);
         cardViewChangeDate = findViewById(R.id.cardViewChangeDate);
+        constraintLayoutChange = findViewById(R.id.constraintLayoutChange);
         spinnerMonth = findViewById(R.id.spinnerMonth);
         editTextYear = findViewById(R.id.editTextYear);
 
@@ -191,11 +196,11 @@ public class DatePickerDialog extends Dialog {
         editTextYear.setTypeface(typeface);
         cardViewChangeDate.setVisibility(View.VISIBLE);
         editTextYear.getText().clear();
-        cardViewChangeDate.setOnClickListener(v -> cardViewChangeDate.setVisibility(View.GONE));
-        imageViewAccept.setOnClickListener(v -> {
-            if (editTextYear.getText().toString().isEmpty())
-                return;
-            try {
+        constraintLayoutChange.setOnClickListener(v -> cardViewChangeDate.setVisibility(View.GONE));
+        btmConfirmChange.setOnClickListener(v -> {
+            if (editTextYear.getText().toString().isEmpty()) {
+                editTextYear.setError(mContext.getString(R.string.pleaseEnterYear));
+            } else try {
                 int year = Integer.parseInt(editTextYear.getText().toString());
                 PersianCalendar today = new PersianCalendar();
                 today.setPersianDate(year,spinnerMonth.getSelectedItemPosition(),1);

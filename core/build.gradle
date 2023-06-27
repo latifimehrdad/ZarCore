@@ -6,13 +6,13 @@ plugins {
 }
 
 android {
-    compileSdk 34
+    compileSdk 33
     namespace 'com.zar.core'
     defaultConfig {
         minSdk 26
-        targetSdk 34
-        versionCode 45
-        versionName "0.4.5"
+        targetSdk 33
+        versionCode 46
+        versionName "0.4.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }

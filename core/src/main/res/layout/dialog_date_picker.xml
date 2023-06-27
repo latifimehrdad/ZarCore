@@ -46,19 +46,21 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewChangeDate"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginVertical="@dimen/_5sdp"
             app:cardCornerRadius="10dp"
             app:cardElevation="4dp"
             android:visibility="gone">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayoutChange"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:padding="10dp">
 
                 <ImageView
@@ -87,7 +89,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/imageViewClose"
-                    app:layout_constraintStart_toEndOf="@id/imageViewAccept"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/spinnerMonth"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/drawable_edit_year"
@@ -100,16 +102,16 @@
                     android:hint="@string/year"
                     android:inputType="number"/>
 
-                <ImageView
-                    android:id="@+id/imageViewAccept"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:layout_constraintTop_toTopOf="@id/editTextYear"
-                    app:layout_constraintBottom_toBottomOf="@id/editTextYear"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintDimensionRatio="W,1:1"
-                    android:src="@drawable/ic_check_circle"/>
-
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btmConfirmChange"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/editTextYear"
+                    app:layout_constraintStart_toStartOf="@id/editTextYear"
+                    app:layout_constraintEnd_toEndOf="@id/spinnerMonth"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textSize="11sp"
+                    android:text="@string/confirmChangeDate"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
