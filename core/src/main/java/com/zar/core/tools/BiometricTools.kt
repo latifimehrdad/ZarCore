@@ -40,7 +40,7 @@ class BiometricTools @Inject constructor(
                 return null
             }
             else -> {
-                return null
+                return context.getString(R.string.biometricNoHardware)
             }
         }
         return null

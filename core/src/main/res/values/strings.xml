@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="biometricNoHardware">دستگاه شما فاقد سنسور اثر انگشت است</string>
+    <string name="biometricNoHardware">ورود بیومتریک روی دستگاه شما پیدا نشد</string>
     <string name="confirm">تایید</string>
 
     <string name="mon">د</string>
