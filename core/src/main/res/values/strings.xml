@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="biometricNoHardware">ورود بایومتریک روی دستگاه شما پیدا نشد</string>
+    <string name="biometricNoHardware">دستگاه شما قابلیت ورود بایومتریک (اثرانگشت و …) را ندارد</string>
+    <string name="biometricErrorNoneEnrolled">لطفا یکی از روش های بایومتریک (اثرانگشت ، تشخیص چهره و …) را در تنظیمات گوشی فعال کنید</string>
     <string name="confirm">تایید</string>
     <string name="confirmChangeDate">تغییر تاریخ</string>
     <string name="pleaseEnterYear">لطفا سال را وارد نمایید</string>
