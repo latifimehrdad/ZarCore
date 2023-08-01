@@ -20,7 +20,6 @@ suspend fun <T> apiCall(responseFunction: suspend () -> T) =
 //-------------------------------------------------------------------------------------------------- apiCall
 
 
-
 //-------------------------------------------------------------------------------------------------- privateApiCall
 private suspend fun <T> privateApiCall(
     responseFunction: suspend () -> T
@@ -28,25 +27,26 @@ private suspend fun <T> privateApiCall(
     withTimeout(60000) {
         responseFunction()
     }
-} catch (e : TimeoutCancellationException) {
+} catch (e: TimeoutCancellationException) {
     null
 }
 //-------------------------------------------------------------------------------------------------- privateApiCall
 
 
-
 //-------------------------------------------------------------------------------------------------- checkResponseError
-fun checkResponseError(response: Response<*>?, liveData : MutableLiveData<ErrorApiModel>) {
+fun checkResponseError(response: Response<*>?, liveData: MutableLiveData<ErrorApiModel>) {
     val message = responseMessage(response)
-    when(response?.code()) {
+    when (response?.code()) {
         401 -> {
             val error = ErrorApiModel(EnumApiError.UnAuthorization, message)
             liveData.postValue(error)
         }
+
         403 -> {
             val error = ErrorApiModel(EnumApiError.UnAccess, message)
             liveData.postValue(error)
         }
+
         else -> {
             val error = ErrorApiModel(EnumApiError.Error, message)
             liveData.postValue(error)
@@ -56,14 +56,15 @@ fun checkResponseError(response: Response<*>?, liveData : MutableLiveData<ErrorA
 //-------------------------------------------------------------------------------------------------- checkResponseError
 
 
-
-
 //-------------------------------------------------------------------------------------------------- responseMessage
 private fun responseMessage(response: Response<*>?): String {
     val error = response?.errorBody()?.string()?.let {
-        if (it.isEmpty())
-            null
-        else
+        if (it.isEmpty()) {
+            if (response.message().isNullOrEmpty())
+                null
+            else
+                return response.message()
+        } else
             JSONObject(it)
     } ?: return "متاسفانه خطایی رخ داده، چند دقیقه بعد دوباره تلاش کنید"
 
@@ -86,16 +87,15 @@ private fun responseMessage(response: Response<*>?): String {
 
 //-------------------------------------------------------------------------------------------------- toMap
 fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith {
-    when (val value = this[it])
-    {
-        is JSONArray ->
-        {
+    when (val value = this[it]) {
+        is JSONArray -> {
             val map = (0 until value.length()).associate { Pair(it.toString(), value[it]) }
             JSONObject(map).toMap().values.toList()
         }
+
         is JSONObject -> value.toMap()
         JSONObject.NULL -> null
-        else            -> value
+        else -> value
     }
 }
 //-------------------------------------------------------------------------------------------------- toMap
