@@ -26,11 +26,20 @@ class InternetManager @Inject constructor(@ApplicationContext private val contex
             EnumInternetConnection.NONE
         else {
             when {
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> EnumInternetConnection.CELLULAR
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> EnumInternetConnection.WIFI
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI_AWARE) -> EnumInternetConnection.WIFI
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> EnumInternetConnection.WIFI
-                else -> EnumInternetConnection.NONE
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ->
+                    EnumInternetConnection.CELLULAR
+
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ->
+                    EnumInternetConnection.WIFI
+
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI_AWARE) ->
+                    EnumInternetConnection.WIFI
+
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) ->
+                    EnumInternetConnection.WIFI
+
+                else ->
+                    EnumInternetConnection.NONE
             }
         }
     }

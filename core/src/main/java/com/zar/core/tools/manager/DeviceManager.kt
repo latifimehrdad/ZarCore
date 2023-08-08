@@ -26,7 +26,7 @@ class DeviceManager@Inject constructor(
         else
             @Suppress("DEPRECATION")
             context.packageManager.getPackageInfo(context.packageName, 0).versionCode.toLong()
-    } catch (E: Exception) {
+    } catch (e: Exception) {
         0
     }
     //---------------------------------------------------------------------------------------------- appVersionCode
@@ -36,7 +36,7 @@ class DeviceManager@Inject constructor(
     fun appVersionName(): String = try {
         @Suppress("DEPRECATION")
         context.packageManager.getPackageInfo(context.packageName, 0).versionName
-    } catch (E: Exception) {
+    } catch (e: Exception) {
         "0.0.0"
     }
     //---------------------------------------------------------------------------------------------- appVersionName

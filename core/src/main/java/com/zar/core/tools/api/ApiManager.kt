@@ -1,6 +1,5 @@
 package com.zar.core.tools.api
 
-import androidx.lifecycle.MutableLiveData
 import com.zar.core.enums.EnumApiError
 import com.zar.core.models.ErrorApiModel
 import kotlinx.coroutines.TimeoutCancellationException
@@ -12,7 +11,6 @@ import retrofit2.Response
 /**
  * Create by Mehrdad Latifi on 8/21/2022
  */
-
 
 //-------------------------------------------------------------------------------------------------- apiCall
 suspend fun <T> apiCall(responseFunction: suspend () -> T) =
@@ -33,27 +31,18 @@ private suspend fun <T> privateApiCall(
 //-------------------------------------------------------------------------------------------------- privateApiCall
 
 
+
 //-------------------------------------------------------------------------------------------------- checkResponseError
-fun checkResponseError(response: Response<*>?, liveData: MutableLiveData<ErrorApiModel>) {
+fun checkResponseError(response: Response<*>?): ErrorApiModel {
     val message = responseMessage(response)
-    when (response?.code()) {
-        401 -> {
-            val error = ErrorApiModel(EnumApiError.UnAuthorization, message)
-            liveData.postValue(error)
-        }
-
-        403 -> {
-            val error = ErrorApiModel(EnumApiError.UnAccess, message)
-            liveData.postValue(error)
-        }
-
-        else -> {
-            val error = ErrorApiModel(EnumApiError.Error, message)
-            liveData.postValue(error)
-        }
+    return when (response?.code()) {
+        401 -> ErrorApiModel(EnumApiError.UnAuthorization, message)
+        403 -> ErrorApiModel(EnumApiError.UnAccess, message)
+        else -> ErrorApiModel(EnumApiError.Error, message)
     }
 }
 //-------------------------------------------------------------------------------------------------- checkResponseError
+
 
 
 //-------------------------------------------------------------------------------------------------- responseMessage
