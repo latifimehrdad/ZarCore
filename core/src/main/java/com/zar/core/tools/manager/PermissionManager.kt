@@ -4,7 +4,10 @@ import android.content.Context
 import android.content.pm.PackageManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.ContextCompat
+import dagger.Module
+import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -12,7 +15,8 @@ import javax.inject.Singleton
  * Created by m-latifi on 8/9/2023.
  */
 
-@Singleton
+@Module
+@InstallIn(SingletonComponent::class)
 class PermissionManager @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
