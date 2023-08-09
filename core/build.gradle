@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdk 26
         targetSdk 33
-        versionCode 51
-        versionName "0.5.1"
+        versionCode 52
+        versionName "0.5.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -69,8 +69,6 @@ dependencies {
     api 'com.facebook.shimmer:shimmer:0.5.0'
 
     api 'com.elvishew:xlog:1.10.1'
-
-    api 'com.karumi:dexter:6.2.0'
 
     api 'com.intuit.sdp:sdp-android:1.0.6'
 
