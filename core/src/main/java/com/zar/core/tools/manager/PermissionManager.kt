@@ -9,11 +9,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
-import javax.inject.Singleton
 
-/**
- * Created by m-latifi on 8/9/2023.
- */
 
 @Module
 @InstallIn(SingletonComponent::class)
