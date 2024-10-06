@@ -40,11 +40,39 @@ public class DatePickerDialog extends Dialog {
     private PersianCalendar date, startDate, endDate;
     private Typeface typeface;
     private MaterialButton btmConfirmChange;
+    private DialogAction dialogAction;
     //endregion
 
-    public DatePickerDialog(Context context) {
+    public interface DialogAction {
+        void onStart();
+        void onDismiss();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (dialogAction != null)
+            dialogAction.onStart();
+    }
+
+
+    @Override
+    public void cancel() {
+        super.cancel();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (dialogAction != null)
+            dialogAction.onDismiss();
+    }
+
+    public DatePickerDialog(Context context, DialogAction dialogAction) {
         super(context);
         mContext = context;
+        this.dialogAction = dialogAction;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         if (getWindow() != null) {

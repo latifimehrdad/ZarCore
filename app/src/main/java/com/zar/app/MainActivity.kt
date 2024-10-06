@@ -1,6 +1,7 @@
 package com.zar.app
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.zar.core.view.picker.date.customviews.DateRangeCalendarView
@@ -71,7 +72,17 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- showDatePickerDialog
     private fun showDatePickerDialog() {
 
-        val datePickerDialog = DatePickerDialog(this)
+        val action = object : DatePickerDialog.DialogAction {
+            override fun onStart() {
+                Log.d("meri","onStart")
+            }
+
+            override fun onDismiss() {
+                Log.d("meri","onDismiss")
+            }
+
+        }
+        val datePickerDialog = DatePickerDialog(this, action)
         datePickerDialog.selectionMode = DateRangeCalendarView.SelectionMode.Range
         datePickerDialog.isDisableDaysAgo = false
         datePickerDialog.acceptButtonColor =
