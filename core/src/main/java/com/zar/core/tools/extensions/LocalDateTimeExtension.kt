@@ -36,6 +36,8 @@ fun LocalDateTime?.toSolarDate(): SolarDateModel? = this?.let {
                     else -> {
                         solarMonth = (solarDay / 31) + 1
                         solarDay = (solarDay % 31)
+                        if (solarDay == 0)
+                            solarDay = 31
                     }
                 }
                 solarYear = gregorianYear - 621
@@ -49,6 +51,8 @@ fun LocalDateTime?.toSolarDate(): SolarDateModel? = this?.let {
                     else -> {
                         solarMonth = (solarDay / 30) + 7
                         solarDay = (solarDay % 30)
+                        if (solarDay == 0)
+                            solarDay = 30
                     }
                 }
                 solarYear = gregorianYear - 621
@@ -67,6 +71,8 @@ fun LocalDateTime?.toSolarDate(): SolarDateModel? = this?.let {
                 else -> {
                     solarMonth = (solarDay / 30) + 10
                     solarDay %= 30
+                    if (solarDay == 0)
+                        solarDay = 30
                 }
             }
             solarYear = gregorianYear - 622
@@ -89,6 +95,8 @@ fun LocalDateTime?.toSolarDate(): SolarDateModel? = this?.let {
                     else -> {
                         solarMonth = (solarDay / 31) + 1
                         solarDay %= 31
+                        if (solarDay == 0)
+                            solarDay = 31
                     }
                 }
                 solarYear = gregorianYear - 621
@@ -98,10 +106,14 @@ fun LocalDateTime?.toSolarDate(): SolarDateModel? = this?.let {
                     0 -> {
                         solarMonth = (solarDay / 30) + 6
                         solarDay %= 30
+                        if (solarDay == 0)
+                            solarDay = 30
                     }
                     else -> {
                         solarMonth = (solarDay / 30) + 7
                         solarDay %= 30
+                        if (solarDay == 0)
+                            solarDay = 30
                     }
                 }
                 solarYear = gregorianYear - 621
@@ -113,17 +125,20 @@ fun LocalDateTime?.toSolarDate(): SolarDateModel? = this?.let {
                 0 -> {
                     solarMonth = (solarDay / 30) + 10
                     solarDay %= 30
+                    if (solarDay == 0)
+                        solarDay = 30
                 }
                 else -> {
                     solarMonth = (solarDay / 30) + 10
                     solarDay %= 30
+                    if (solarDay == 0)
+                        solarDay = 30
                 }
             }
             solarYear = gregorianYear - 622
         }
 
     }
-
     SolarDateModel(solarYear, solarMonth, solarDay, dayOfWeek)
 }
 //-------------------------------------------------------------------------------------------------- toSolarDate
