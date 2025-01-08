@@ -48,16 +48,20 @@ class HiltProviders {
     @Provides
     @Singleton
     fun provideHttpClient(
+        showLoad: Boolean,
         interceptor: Interceptor,
         loggingInterceptor: HttpLoggingInterceptor
-    ) = OkHttpClient()
-        .newBuilder()
-        .readTimeout(60, TimeUnit.SECONDS)
-        .writeTimeout(30, TimeUnit.SECONDS)
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .addInterceptor(interceptor)
-        .addNetworkInterceptor(loggingInterceptor)
-        .build()
+    ): OkHttpClient {
+        val client = OkHttpClient()
+            .newBuilder()
+            .readTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(interceptor)
+        if (showLoad)
+            client.addNetworkInterceptor(loggingInterceptor)
+        return client.build()
+    }
     //---------------------------------------------------------------------------------------------- provideHttpClient
 
 
