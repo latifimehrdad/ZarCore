@@ -35,9 +35,9 @@ public class PersianCalendar extends GregorianCalendar {
         this.persianDay = day;
     }
 
-    public boolean isPersianLeapYear() {
+    public boolean isPersianLeapYear(int year) {
         // calculatePersianDate();
-        return PersianCalendarUtils.isPersianLeapYear(this.persianYear);
+        return PersianCalendarUtils.isPersianLeapYear(year);
     }
 
     public void setPersianDate(int persianYear, int persianMonth, int persianDay) {

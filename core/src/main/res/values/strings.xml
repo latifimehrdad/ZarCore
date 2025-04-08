@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">SunDatePicker</string>
+    <string name="ok_btn">تائید</string>
+    <string name="cancel_btn">انصراف</string>
+    <string name="today">امروز</string>
+    <string name="date_placeholder">"%s، %d %s"</string>
 
     <string name="biometricNoHardware">دستگاه شما قابلیت ورود بایومتریک (اثرانگشت و …) را ندارد</string>
     <string name="biometricErrorNoneEnrolled">لطفا یکی از روش های بایومتریک (اثرانگشت ، تشخیص چهره و …) را در تنظیمات گوشی فعال کنید</string>

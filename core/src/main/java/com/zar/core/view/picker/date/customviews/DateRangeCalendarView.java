@@ -433,6 +433,13 @@ public class DateRangeCalendarView extends LinearLayout {
         int startDay = month.get(Calendar.DAY_OF_WEEK);
         int persianDay = month.getPersianDay();
 
+        if (month.isPersianLeapYear(month.getPersianYear() - 1) && month.getPersianMonth() != 0)
+            startDay = startDay + 1;
+
+        if (startDay > 7)
+            startDay = 0;
+
+
         if (startDay != 7) {
             month.setPersianDay(persianDay - startDay);
         }

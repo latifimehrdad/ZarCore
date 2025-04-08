@@ -6,6 +6,8 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.zar.core.view.picker.date.customviews.DateRangeCalendarView
 import com.zar.core.view.picker.date.dialog.DatePickerDialog
+import com.zar.core.view.picker.persian.DatePicker
+import com.zar.core.view.picker.persian.interfaces.DateSetListener
 
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +17,16 @@ class MainActivity : AppCompatActivity() {
 
         val btn = findViewById<Button>(R.id.btn_Accept)
         btn.setOnClickListener {
-            showDatePickerDialog()
+            val back =
+                DateSetListener { id, calendar, day, month, year ->  }
+            DatePicker.Builder()
+                .id(7126)
+                .minDate(1400,1,1)
+                .maxDate(1500,12,1)
+                .closeYearAutomatically(true)
+                .build(back)
+                .show(supportFragmentManager, "")
+//            showDatePickerDialog()
         }
 
 /*        val media = File(
