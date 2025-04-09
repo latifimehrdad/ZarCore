@@ -1,5 +1,6 @@
 package com.zar.core.view.picker.persian;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -162,6 +163,7 @@ public class DatePicker extends DialogFragment
             params.height = getResources().getDimensionPixelSize(R.dimen.dialog_height);
             window.setAttributes((WindowManager.LayoutParams) params);
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            mCallBack.onShowDialog();
         }
     }
 
@@ -192,6 +194,12 @@ public class DatePicker extends DialogFragment
         view.findViewById(R.id.cancel).setOnClickListener(this);
 
         return view;
+    }
+
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        mCallBack.onDismissDialog();
     }
 
     @Override

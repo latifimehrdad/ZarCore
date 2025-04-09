@@ -8,6 +8,7 @@ import com.zar.core.view.picker.date.customviews.DateRangeCalendarView
 import com.zar.core.view.picker.date.dialog.DatePickerDialog
 import com.zar.core.view.picker.persian.DatePicker
 import com.zar.core.view.picker.persian.interfaces.DateSetListener
+import java.util.Calendar
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,8 +18,26 @@ class MainActivity : AppCompatActivity() {
 
         val btn = findViewById<Button>(R.id.btn_Accept)
         btn.setOnClickListener {
-            val back =
-                DateSetListener { id, calendar, day, month, year ->  }
+            val back = object : DateSetListener {
+                override fun onDateSet(
+                    id: Int,
+                    calendar: Calendar?,
+                    day: Int,
+                    month: Int,
+                    year: Int
+                ) {
+
+                }
+
+                override fun onShowDialog() {
+
+                }
+
+                override fun onDismissDialog() {
+
+                }
+
+            }
             DatePicker.Builder()
                 .id(7126)
                 .minDate(1400,1,1)
