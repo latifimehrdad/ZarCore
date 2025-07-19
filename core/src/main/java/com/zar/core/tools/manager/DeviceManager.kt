@@ -1,7 +1,9 @@
 package com.zar.core.tools.manager
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
+import android.provider.Settings
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -17,6 +19,19 @@ import javax.inject.Inject
 @InstallIn(SingletonComponent::class)
 class DeviceManager@Inject constructor(
     @ApplicationContext private val context: Context) {
+
+    //---------------------------------------------------------------------------------------------- getDeviceLog
+    fun getDeviceLog() =
+        "ANDROID_ID:${getAndroidId()}, MANUFACTURER:${deviceBrand()}, Android_Version:${androidVersion()}"
+    //---------------------------------------------------------------------------------------------- getDeviceLog
+
+
+    //---------------------------------------------------------------------------------------------- getAndroidId
+    @SuppressLint("HardwareIds")
+    fun getAndroidId() =
+        Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+    //---------------------------------------------------------------------------------------------- getAndroidId
+
 
     //---------------------------------------------------------------------------------------------- appVersionCode
     fun appVersionCode(): Long = try {
@@ -46,9 +61,9 @@ class DeviceManager@Inject constructor(
     fun androidVersion(): String = try {
         val release = Build.VERSION.RELEASE
         val sdkVersion = Build.VERSION.SDK_INT
-        "Android Version is $release & SDK Version is $sdkVersion"
+        "$release, SDK_Version:$sdkVersion"
     } catch (e: Exception) {
-        "Android Version : ${e.message}"
+        "${e.message}"
     }
     //---------------------------------------------------------------------------------------------- androidVersion
 
