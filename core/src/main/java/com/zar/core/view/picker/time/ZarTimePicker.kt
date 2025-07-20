@@ -61,7 +61,7 @@ class ZarTimePicker @JvmOverloads constructor(
     private var returnAngle = 225.0
     private var draggingDeparture = false
     private var draggingReturn = false
-    private val stepMinutes = 15
+    private var stepMinutes = 15
     private val textRect = Rect()
     private var timeLayoutId = 0
     private var departureLayoutId = 0
@@ -69,6 +69,9 @@ class ZarTimePicker @JvmOverloads constructor(
 
     var listener: ((departureTime: LocalTime, returnTime: LocalTime) -> Unit)? = null
 
+    fun setStep(step: Int) {
+        stepMinutes = step
+    }
 
     fun getDepartureTime() = computeDepartureTime()
 
